@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:health_tracker/data/repositories/firebase_auth.dart';
 import 'package:health_tracker/shared/services/user_provider.dart';
 import 'package:health_tracker/shared/styles/themes.dart';
+import 'package:health_tracker/ui/screens/auth/welcome_screen.dart';
 import 'package:health_tracker/ui/screens/messages/messages_screen.dart';
 import 'package:health_tracker/ui/screens/profile/profile_screen.dart';
 import 'package:health_tracker/ui/screens/settings/settings_screen.dart';
@@ -31,17 +32,17 @@ class _NavDrawerState extends State<NavDrawer> {
               children: [
                 CircleAvatar(
                   backgroundColor: Colors.red,
-                  backgroundImage: NetworkImage(user.photoUrl),
-                  radius: 25,
+                  backgroundImage: NetworkImage(user?.photoUrl ?? ''),
+                  radius: 22,
                 ),
                 const SizedBox(height: 14),
                 Text(
-                  user.username,
+                  user.username ?? '',
                   style: const TextStyle(fontSize: 26),
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  user.email,
+                  user.email ?? '',
                   style: const TextStyle(fontSize: 12, color: Colors.grey),
                 ),
               ],
@@ -62,7 +63,7 @@ class _NavDrawerState extends State<NavDrawer> {
                 context,
                 MaterialPageRoute(
                     builder: (BuildContext context) => ProfileScreen(
-                          uid: user.uid,
+                          uid: user?.uid ?? '',
                         )))
           },
         ),
@@ -96,7 +97,13 @@ class _NavDrawerState extends State<NavDrawer> {
         ListTile(
           leading: const Icon(Icons.exit_to_app),
           title: const Text('Logout'),
-          onTap: () => {FirebaseAuthRepo().logout()},
+          onTap: () async {
+            await FirebaseAuthRepo().logout();
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => WelcomeScreen()),
+            );
+          },
         ),
         ListTile(
           leading: const Icon(CupertinoIcons.moon_stars),

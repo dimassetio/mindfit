@@ -6,18 +6,18 @@ enum Sex { male, female }
 List<OnBoardingModel> onboardinglist = const [
   OnBoardingModel(
     img: MyAssets.onboradingone,
-    title: 'Manage Your Task',
+    title: 'Kelola Tugasmu',
     description:
-        'With This Small App You Can Orgnize All Your Tasks and Duties In A One Single App.',
+        'Dengan aplikasi kecil ini, kamu bisa mengatur semua tugas dan kewajibanmu dalam satu aplikasi.',
   ),
   OnBoardingModel(
     img: MyAssets.onboradingtwo,
-    title: 'Plan Your Day',
-    description: 'Add A Task And The App Will Remind You.',
+    title: 'Rencanakan Harimu',
+    description: 'Tambahkan tugas dan aplikasi akan mengingatkannya untukmu.',
   ),
   OnBoardingModel(
     img: MyAssets.onboradingthree,
-    title: 'Accomplish Your Goals ',
-    description: 'Track Your Activities And Accomplish Your Goals.',
+    title: 'Capai Tujuanmu',
+    description: 'Lacak aktivitasmu dan capai semua tujuanmu.',
   ),
 ];

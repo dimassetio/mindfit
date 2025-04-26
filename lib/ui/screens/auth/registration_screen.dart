@@ -1,8 +1,10 @@
 import 'dart:typed_data';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:health_tracker/data/repositories/firebase_auth.dart';
+import 'package:health_tracker/data/repositories/storage.dart';
 import 'package:health_tracker/shared/utilities/utils.dart';
 import 'package:health_tracker/ui/screens/auth/login_screen.dart';
 import 'package:health_tracker/shared/constants/consts_variables.dart';
@@ -16,6 +18,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:sizer/sizer.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:health_tracker/shared/utilities/validators.dart';
+import 'package:health_tracker/data/models/user_model.dart' as model;
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -31,6 +34,8 @@ class _LoginScreenState extends State<SignUpScreen> {
   late TextEditingController _passwordController;
   Sex? _sex = Sex.male;
   Uint8List? _image;
+
+  final _firestore = FirebaseFirestore.instance;
 
   @override
   void initState() {
@@ -84,16 +89,19 @@ class _LoginScreenState extends State<SignUpScreen> {
                     // SizedBox(
                     //   height: 8.h,
                     // ),
-                    Text('Hey !',
-                        style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                            fontSize: 20.sp,
-                            letterSpacing: 2,
-                            fontWeight: FontWeight.bold)),
+                    Text('Hai !',
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayLarge
+                            ?.copyWith(
+                                fontSize: 20.sp,
+                                letterSpacing: 2,
+                                fontWeight: FontWeight.bold)),
                     SizedBox(
                       height: 1.5.h,
                     ),
                     Text(
-                      'Create a New Account !',
+                      'Buat Akun Baru !',
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             fontSize: 12.sp,
                             letterSpacing: 2,
@@ -137,7 +145,7 @@ class _LoginScreenState extends State<SignUpScreen> {
                       icon: Icons.person,
                       keyboardtype: TextInputType.emailAddress,
                       validator: (value) {
-                        return value!.length < 3 ? 'Unvalid Name' : null;
+                        return value!.length < 3 ? 'Nama tidak valid' : null;
                       },
                       textEditingController: _nameController,
                     ),
@@ -156,7 +164,7 @@ class _LoginScreenState extends State<SignUpScreen> {
                           },
                           activeColor: Colors.red,
                         ),
-                        const Text("Male"),
+                        const Text("Laki-Laki"),
                         Radio<Sex>(
                           value: Sex.female,
                           groupValue: _sex,
@@ -167,19 +175,19 @@ class _LoginScreenState extends State<SignUpScreen> {
                           },
                           activeColor: Colors.red,
                         ),
-                        const Text("Female"),
+                        const Text("Perempuan"),
                       ],
                     ),
                     SizedBox(
                       height: 2.h,
                     ),
                     MyTextfield(
-                      hint: 'Email Address',
+                      hint: 'Email',
                       icon: Icons.email,
                       keyboardtype: TextInputType.emailAddress,
                       validator: (value) {
                         return !Validators.isValidEmail(value!)
-                            ? 'Enter a valid email'
+                            ? 'Masukkan email yang valid'
                             : null;
                       },
                       textEditingController: _emailController,
@@ -193,9 +201,7 @@ class _LoginScreenState extends State<SignUpScreen> {
                       keyboardtype: TextInputType.text,
                       obscure: true,
                       validator: (value) {
-                        return value!.length < 6
-                            ? "Enter min. 6 characters"
-                            : null;
+                        return value!.length < 6 ? "Minimal 6 karakter" : null;
                       },
                       textEditingController: _passwordController,
                     ),
@@ -205,7 +211,7 @@ class _LoginScreenState extends State<SignUpScreen> {
                     ButtonWidget(
                         color: MyThemes.primary,
                         width: 80.w,
-                        title: 'CREATE ACCOUNT',
+                        title: 'BUAT AKUN',
                         func: () async {
                           bool isConnected =
                               await InternetConnectionChecker().hasConnection;
@@ -217,8 +223,7 @@ class _LoginScreenState extends State<SignUpScreen> {
                             await _signUpWithEmailAndPass(context);
                           } else {
                             MySnackBar.error(
-                                message:
-                                    'Please Check Your Interenet Connection',
+                                message: 'Cek kembali koneksi internet Anda',
                                 color: Colors.red,
                                 context: context);
                           }
@@ -230,7 +235,7 @@ class _LoginScreenState extends State<SignUpScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Already have an Account ?',
+                          'Sudah punya akun ?',
                           style: Theme.of(context)
                               .textTheme
                               .titleMedium
@@ -282,8 +287,36 @@ class _LoginScreenState extends State<SignUpScreen> {
               file: _image)
           .onError((error, stackTrace) => MySnackBar.error(
               message: error.toString(), color: Colors.red, context: context));
-      if (FirebaseAuth.instance.currentUser != null) {
-        // Navigator.pop(context);
+      var cred = FirebaseAuth.instance.currentUser;
+      if (cred != null) {
+        await cred.updateDisplayName(
+            _nameController.text); // <<< tambah await di sini
+
+        print("SET PHOTOURL ${_image != null}");
+        String photoUrl = _image != null
+            ? await FireStorage()
+                .uploadImageToStorage('profilePics', _image!, false)
+            : 'https://i.stack.imgur.com/l60Hf.png';
+
+        print("CREATED UID: ${cred.uid}");
+
+        model.User user = model.User(
+          username: _nameController.text,
+          uid: cred.uid,
+          sex: _sex!,
+          photoUrl: photoUrl,
+          email: _emailController.text,
+          bio: '',
+          bookmarkedRecipes: [],
+          followers: [],
+          following: [],
+          isDarkMode: true,
+        );
+
+        print("USER TO JSON: ${user.toJson()}");
+
+        await _firestore.collection('users').doc(cred.uid).set(user.toJson());
+        print('User document successfully created!');
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const Navigation()));
       }

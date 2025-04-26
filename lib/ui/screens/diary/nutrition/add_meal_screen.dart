@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:health_tracker/data/models/food_model.dart';
 import 'package:health_tracker/data/models/product_model.dart';
 import 'package:health_tracker/data/repositories/fdc_api.dart';
@@ -43,8 +42,9 @@ class _AddFoodScreenState extends State<AddMealScreen> {
     String barcodeScanRes;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-          '#ff6666', 'Cancel', true, ScanMode.BARCODE);
+      // barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+      //     '#ff6666', 'Cancel', true, ScanMode.BARCODE);
+      barcodeScanRes = "";
       log(barcodeScanRes);
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
@@ -170,13 +170,13 @@ class _AddFoodScreenState extends State<AddMealScreen> {
                                               }
                                             },
                                             child: const Padding(
-                                              padding:
-                                                  EdgeInsets.all(16.0),
+                                              padding: EdgeInsets.all(16.0),
                                               child: Column(
                                                 children: [
                                                   Icon(
                                                     // Icons.qr_code_scanner,
-                                                    CupertinoIcons.barcode_viewfinder,
+                                                    CupertinoIcons
+                                                        .barcode_viewfinder,
                                                     size: 50,
                                                   ),
                                                   SizedBox(
@@ -203,8 +203,7 @@ class _AddFoodScreenState extends State<AddMealScreen> {
                                                           const QuickAddScreen()));
                                             },
                                             child: const Padding(
-                                              padding:
-                                                  EdgeInsets.all(16.0),
+                                              padding: EdgeInsets.all(16.0),
                                               child: Column(
                                                 children: [
                                                   Icon(

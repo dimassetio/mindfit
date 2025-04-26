@@ -9,7 +9,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final List<Widget>? actions;
 
-  const CustomAppBar({Key? key, required this.title, this.actions}) : super(key: key);
+  const CustomAppBar({Key? key, required this.title, this.actions})
+      : super(key: key);
 
   @override
   Size get preferredSize => const Size.fromHeight(50.0);
@@ -45,7 +46,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             },
             child: CircleAvatar(
               // backgroundImage: AssetImage('assets/images/profile.jpg'),
-              backgroundImage: NetworkImage(user.photoUrl),
+              backgroundImage: NetworkImage(user?.photoUrl ?? ""),
               backgroundColor: Colors.red,
             ),
           ),

@@ -63,16 +63,19 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Welcome back!',
-                        style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                            fontSize: 20.sp,
-                            letterSpacing: 2,
-                            fontWeight: FontWeight.bold)),
+                    Text('Selamat datang kembali!',
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayLarge
+                            ?.copyWith(
+                                fontSize: 20.sp,
+                                letterSpacing: 2,
+                                fontWeight: FontWeight.bold)),
                     SizedBox(
                       height: 1.5.h,
                     ),
                     Text(
-                      'Sign In To Continue !',
+                      'Sign In untuk Lanjut !',
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             fontSize: 12.sp,
                             letterSpacing: 2,
@@ -82,12 +85,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 10.h,
                     ),
                     MyTextfield(
-                      hint: 'Email Address',
+                      hint: 'Email',
                       icon: Icons.email,
                       keyboardtype: TextInputType.emailAddress,
                       validator: (value) {
                         return !Validators.isValidEmail(value!)
-                            ? 'Enter a valid email'
+                            ? 'Masukkan email valid'
                             : null;
                       },
                       textEditingController: _emailController,
@@ -102,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       obscure: true,
                       validator: (value) {
                         return value!.length < 6
-                            ? "Enter min. 6 characters"
+                            ? "Masukkan minimal 6 karkter"
                             : null;
                       },
                       textEditingController: _passwordController,
@@ -124,8 +127,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             _authenticateWithEmailAndPass(context);
                           } else {
                             MySnackBar.error(
-                                message:
-                                    'Please Check Your Internet Connection',
+                                message: 'Cek koneksi internet',
                                 color: Colors.red,
                                 context: context);
                           }
@@ -137,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Don\'t have an Account ?',
+                          'Belum punya akun ?',
                           style: Theme.of(context)
                               .textTheme
                               .titleMedium

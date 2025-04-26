@@ -33,7 +33,7 @@ class _NavigationState extends State<Navigation> {
   final List<String> _screenTitles = const <String>[
     'Recipes',
     'Plans',
-    'Health Tracker',
+    'Mindfit',
     'Diary',
     'Together',
   ];

@@ -9,8 +9,15 @@ class UserProvider with ChangeNotifier {
   User get getUser => _user!;
 
   Future<void> refreshUser() async {
-    User user = await _authRepo.getUserDetails();
-    _user = user;
-    notifyListeners();
+    try {
+      User? user = await _authRepo.getUserDetails();
+      if (user is User) {
+        _user = user;
+        notifyListeners();
+      }
+    } catch (e) {
+      print("User data belum ada di Firestore: $e");
+      // Bisa pilih: diamkan saja, atau kasih user kosong, atau re-try nanti.
+    }
   }
 }

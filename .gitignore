@@ -54,3 +54,6 @@ firebase.json
 firestore.indexes.json
 firestore.rules
 storage.rules
+
+# FVM Version Cache
+.fvm/

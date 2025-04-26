@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
@@ -16,15 +17,14 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   var initializationSettingsAndroid =
       const AndroidInitializationSettings('splash');
   var initializationSettingsIOS = DarwinInitializationSettings(
-      requestAlertPermission: true,
-      requestBadgePermission: true,
-      requestSoundPermission: true,
-      onDidReceiveLocalNotification:
-          (int id, String? title, String? body, String? payload) async {});
+    requestAlertPermission: true,
+    requestBadgePermission: true,
+    requestSoundPermission: true,
+  );
   var initializationSettings = InitializationSettings(
       android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
   await flutterLocalNotificationsPlugin.initialize(initializationSettings,
@@ -44,7 +44,7 @@ Future main() async {
 }
 
 class MyApp extends StatelessWidget {
-  static const String title = 'Health Tracker';
+  static const String title = 'Mindfit';
 
   const MyApp({Key? key}) : super(key: key);
 
@@ -64,17 +64,29 @@ class MyApp extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 theme:
                     value.darkTheme ? MyThemes.darkTheme : MyThemes.lightTheme,
-                home: StreamBuilder<User?>(
-                    stream: FirebaseAuth.instance.authStateChanges(),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const MyCircularIndicator();
-                      }
-                      if (snapshot.hasData) {
-                        return const Navigation();
-                      }
-                      return const WelcomeScreen();
-                    }),
+                home: FirebaseAuth.instance.currentUser != null
+                    ? FutureBuilder<DocumentSnapshot>(
+                        future: FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(FirebaseAuth.instance.currentUser!.uid)
+                            .get(),
+                        builder: (context, firestoreSnapshot) {
+                          if (firestoreSnapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const MyCircularIndicator();
+                          }
+
+                          if (firestoreSnapshot.hasData &&
+                              firestoreSnapshot.data!.exists) {
+                            // If the document exists, navigate to the Navigation screen
+                            return const Navigation();
+                          } else {
+                            // If the document does not exist (new user), navigate to WelcomeScreen
+                            return const WelcomeScreen();
+                          }
+                        },
+                      )
+                    : const WelcomeScreen(),
               );
             },
           ),

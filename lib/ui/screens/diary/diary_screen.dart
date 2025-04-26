@@ -23,7 +23,7 @@ import 'package:pedometer/pedometer.dart';
 import 'package:intl/intl.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:fab_circular_menu/fab_circular_menu.dart';
+import 'package:fab_circular_menu_plus/fab_circular_menu_plus.dart';
 
 class DiaryScreen extends StatefulWidget {
   const DiaryScreen({Key? key}) : super(key: key);
@@ -326,8 +326,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                                     ),
                                     const Column(
                                       children: [
-                                        Icon(
-                                            FontAwesomeIcons.personWalking,
+                                        Icon(FontAwesomeIcons.personWalking,
                                             color: Color.fromARGB(
                                                 255, 249, 149, 76)),
                                         SizedBox(
@@ -356,8 +355,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                                     ),
                                     const Column(
                                       children: [
-                                        Icon(
-                                            FontAwesomeIcons.personRunning,
+                                        Icon(FontAwesomeIcons.personRunning,
                                             color: Color.fromARGB(
                                                 255, 247, 105, 132)),
                                         SizedBox(
@@ -446,9 +444,10 @@ class _DiaryScreenState extends State<DiaryScreen> {
                                             height: 100,
                                             width: double.infinity,
                                             child: LineChart(LineChartData(
-                                              gridData: const FlGridData(show: false),
-                                              titlesData:
-                                                  const FlTitlesData(show: false),
+                                              gridData:
+                                                  const FlGridData(show: false),
+                                              titlesData: const FlTitlesData(
+                                                  show: false),
                                               borderData:
                                                   FlBorderData(show: false),
                                               minX: 0,
@@ -506,7 +505,8 @@ class _DiaryScreenState extends State<DiaryScreen> {
                                                             center: Alignment
                                                                 .topCenter,
                                                             colors: [
-                                                              const Color.fromARGB(
+                                                              const Color
+                                                                      .fromARGB(
                                                                       255,
                                                                       220,
                                                                       18,
@@ -636,10 +636,12 @@ class _DiaryScreenState extends State<DiaryScreen> {
                                                     width: 150,
                                                     child:
                                                         LineChart(LineChartData(
-                                                      gridData: const FlGridData(
-                                                          show: false),
-                                                      titlesData: const FlTitlesData(
-                                                          show: false),
+                                                      gridData:
+                                                          const FlGridData(
+                                                              show: false),
+                                                      titlesData:
+                                                          const FlTitlesData(
+                                                              show: false),
                                                       borderData: FlBorderData(
                                                           show: false),
                                                       minX: 0,
@@ -674,7 +676,8 @@ class _DiaryScreenState extends State<DiaryScreen> {
                                                             barWidth: 5,
                                                             isStrokeCapRound:
                                                                 true,
-                                                            dotData: const FlDotData(
+                                                            dotData:
+                                                                const FlDotData(
                                                               show: false,
                                                             ),
                                                             belowBarData: BarAreaData(
@@ -1223,7 +1226,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
             ),
           ],
         ),
-        floatingActionButton: FabCircularMenu(
+        floatingActionButton: FabCircularMenuPlus(
           onDisplayChange: (isOpen) {
             BackdropFilter(filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10));
           },

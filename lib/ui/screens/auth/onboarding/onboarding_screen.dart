@@ -189,7 +189,11 @@ class OnBoardingScreen extends StatefulWidget {
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   final _controller = PageController();
   int _currentPage = 0;
-  List colors = [const Color.fromARGB(255, 236, 217, 217), const Color.fromARGB(255, 255, 222, 222), const Color.fromARGB(255, 246, 220, 220)];
+  List colors = [
+    const Color.fromARGB(255, 236, 217, 217),
+    const Color.fromARGB(255, 255, 222, 222),
+    const Color.fromARGB(255, 246, 220, 220)
+  ];
 
   AnimatedContainer _buildDots({int? index}) {
     return AnimatedContainer(
@@ -282,10 +286,15 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           padding: const EdgeInsets.all(30),
                           child: ElevatedButton(
                             onPressed: () {
-                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const AboutYouScreen()));
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const AboutYouScreen()));
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.red,
+                              foregroundColor: Colors.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50),
                               ),
@@ -297,7 +306,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                               textStyle:
                                   TextStyle(fontSize: (width <= 550) ? 13 : 17),
                             ),
-                            child: const Text("START NOW"),
+                            child: const Text("Mulai Sekarang"),
                           ),
                         )
                       : Padding(
@@ -330,6 +339,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.red,
+                                  foregroundColor: Colors.white,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(50),
                                   ),
@@ -342,7 +352,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                   textStyle: TextStyle(
                                       fontSize: (width <= 550) ? 13 : 17),
                                 ),
-                                child: const Text("NEXT"),
+                                child: const Text("Lanjut"),
                               ),
                             ],
                           ),

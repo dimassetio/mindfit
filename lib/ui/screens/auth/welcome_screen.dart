@@ -29,7 +29,7 @@ class WelcomeScreen extends StatelessWidget {
                 height: 4.h,
               ),
               Text(
-                'Hello !',
+                'Halo !',
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
                     fontSize: 20.sp,
                     letterSpacing: 3,
@@ -39,7 +39,7 @@ class WelcomeScreen extends StatelessWidget {
                 height: 2.h,
               ),
               Text(
-                'Welcome to Health Tracker\n Get started !',
+                'Selamat datang di Mindfit\n Yuk Mulai !',
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       letterSpacing: 3,
@@ -67,7 +67,7 @@ class WelcomeScreen extends StatelessWidget {
               ButtonWidget(
                 color: MyThemes.primary,
                 width: 80.w,
-                title: 'CREATE ACCOUNT',
+                title: 'BUAT AKUN',
                 func: () {
                   Navigator.push(
                       context,

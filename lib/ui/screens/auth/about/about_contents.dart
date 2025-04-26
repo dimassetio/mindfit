@@ -14,14 +14,16 @@ class AboutContents {
 
 List<AboutContents> contents = [
   AboutContents(
-      title: "Tell us about yourself!",
-      desc: "To give you a better experience we need\n to know your gender",
+      title: "Ceritakan Dirimu!",
+      desc:
+          "Untuk memberikan pengalaman lebih baik\n Kami butuh informasi jenis kelamin Anda",
       body: const GenderPicker()),
   AboutContents(
-    title: "How old are you?",
-    desc: "This helps us create your personalized plan",
+    title: "Berapa usia mu?",
+    desc: "Ini membantu menyesuaikan kebutuhan Anda",
     body: NumberPicker(
-      selectedTextStyle: const TextStyle(color: Colors.red, fontSize: 32, fontWeight: FontWeight.bold),
+      selectedTextStyle: const TextStyle(
+          color: Colors.red, fontSize: 32, fontWeight: FontWeight.bold),
       minValue: 0,
       maxValue: 140,
       value: 18,
@@ -29,8 +31,8 @@ List<AboutContents> contents = [
     ),
   ),
   AboutContents(
-    title: "What's your weight?",
-    desc: "You can always change this later",
+    title: "Berapa berat badan Anda?",
+    desc: "Anda dapat mengubah ini setiap saat",
     body: HorizontalPicker(
       initialPosition: InitialPosition.start,
       minValue: 0,

@@ -19,7 +19,40 @@ class FirebaseAuthRepo implements UserRepository {
 
     DocumentSnapshot documentSnapshot =
         await _firestore.collection('users').doc(currentUser.uid).get();
+    // If documentSnapshot does not exist, create a new user
+    if (!documentSnapshot.exists) {
+      // Create a new user model with the available data
+      if (currentUser.displayName == null) {
+        await currentUser.updateDisplayName("User Name");
+      }
+      model.User newUser = model.User(
+        username: currentUser.displayName ??
+            'User Name', // You can adjust this if necessary
+        uid: currentUser.uid,
+        sex: Sex
+            .male, // You should adjust based on available data or default value
+        photoUrl: currentUser.photoURL ??
+            'https://i.stack.imgur.com/l60Hf.png', // Default profile image
+        email: currentUser.email ?? 'No Email',
+        bio: '',
+        bookmarkedRecipes: [],
+        followers: [],
+        following: [],
+        isDarkMode: true,
+      );
 
+      // Set the new user data into Firestore
+      await _firestore
+          .collection('users')
+          .doc(currentUser.uid)
+          .set(newUser.toJson());
+
+      // Return the newly created user
+      return newUser;
+    } else {
+      // If the document exists, return the existing user data
+      return model.User.fromSnap(documentSnapshot);
+    }
     return model.User.fromSnap(documentSnapshot);
   }
 
@@ -40,39 +73,59 @@ class FirebaseAuthRepo implements UserRepository {
   }
 
   @override
-  Future<void> register(
-      {required String username,
-      required String email,
-      required String password,
-      required Sex sex,
-      Uint8List? file}) async {
+  Future<void> register({
+    required String username,
+    required String email,
+    required String password,
+    required Sex sex,
+    Uint8List? file,
+  }) async {
     try {
-      UserCredential cred = await _firebaseAuth.createUserWithEmailAndPassword(
-          email: email, password: password);
-      _firebaseAuth.currentUser!.updateDisplayName(username);
-      String photoUrl = file != null
-          ? await FireStorage().uploadImageToStorage('profilePics', file, false)
-          : 'https://i.stack.imgur.com/l60Hf.png';
-
-      model.User user = model.User(
-        username: username,
-        uid: cred.user!.uid,
-        sex: sex,
-        photoUrl: photoUrl,
+      print("CREATE USER FIREBASE!");
+      UserCredential cred = await _firebaseAuth
+          .createUserWithEmailAndPassword(
         email: email,
-        bio: '',
-        bookmarkedRecipes: [],
-        followers: [],
-        following: [],
-        isDarkMode: true,
-      );
+        password: password,
+      )
+          .then((cred) async {
+        if (cred.user == null) {
+          throw Exception('Failed to create user.');
+        }
 
-      await _firestore
-          .collection('users')
-          .doc(cred.user!.uid)
-          .set(user.toJson());
+        print("CHANGE USERNAME!");
+        await cred.user!
+            .updateDisplayName(username); // <<< tambah await di sini
 
-      // res = 'success';
+        print("SET PHOTOURL ${file != null}");
+        String photoUrl = file != null
+            ? await FireStorage()
+                .uploadImageToStorage('profilePics', file, false)
+            : 'https://i.stack.imgur.com/l60Hf.png';
+
+        print("CREATED UID: ${cred.user!.uid}");
+
+        model.User user = model.User(
+          username: username,
+          uid: cred.user!.uid,
+          sex: sex,
+          photoUrl: photoUrl,
+          email: email,
+          bio: '',
+          bookmarkedRecipes: [],
+          followers: [],
+          following: [],
+          isDarkMode: true,
+        );
+
+        print("USER TO JSON: ${user.toJson()}");
+
+        await _firestore
+            .collection('users')
+            .doc(cred.user!.uid)
+            .set(user.toJson());
+        print('User document successfully created!');
+        return cred;
+      });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         throw 'The password provided is too weak.';
@@ -81,8 +134,10 @@ class FirebaseAuthRepo implements UserRepository {
       } else {
         throw 'Please check your email address.';
       }
-    } catch (e) {
-      throw Exception('oops,Something wrong happend!');
+    } catch (e, stacktrace) {
+      print('Unexpected error during registration: $e');
+      print(stacktrace);
+      rethrow; // biar error asli tetap naik
     }
   }
 

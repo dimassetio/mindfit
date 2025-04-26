@@ -1,4 +1,3 @@
-
 class OnboardingContents {
   final String title;
   final String image;
@@ -10,20 +9,20 @@ class OnboardingContents {
 
 List<OnboardingContents> contents = [
   OnboardingContents(
-    title: "Track Your progress and stay fit",
+    title: "Pantau Perkembanganmu",
     image: "assets/illustrations/Fitness tracker-amico_red.png",
-    desc: "Remember to keep track of your fitness journey accomplishments.",
+    desc: "Ingat untuk selalu memantau pencapaian perjalanan kebugaranmu.",
   ),
   OnboardingContents(
-    title: "Join our awesome community!",
+    title: "Bergabunglah dengan Komunitas Kami!",
     image: "assets/illustrations/Coaches-amico_red.png",
     desc:
-        "Connect and share your knowledge with fitness enthusiasts from around the world!.",
+        "Terhubung dan berbagi pengetahuan dengan pecinta kebugaran dari seluruh dunia!",
   ),
   OnboardingContents(
-    title: "Action is the key to all success",
+    title: "Tindakan adalah Kunci Segala Kesuksesan",
     image: "assets/illustrations/Timeline-amico_red.png",
     desc:
-        "Let us help you achieve your fitness goals with our challenges, plans and healthy recipes!.",
+        "Kami siap membantumu mencapai tujuan kebugaran lewat tantangan, rencana, dan resep sehat kami!",
   ),
 ];
