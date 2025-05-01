@@ -5,7 +5,10 @@ import 'package:health_tracker/ui/screens/plans/workouts_details.dart';
 class NewWorkout extends StatelessWidget {
   final Future<List<Workouts>> newWorkoutsList;
 
-  const NewWorkout({Key? key, required this.newWorkoutsList,}) : super(key: key);
+  const NewWorkout({
+    Key? key,
+    required this.newWorkoutsList,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +41,8 @@ class NewWorkout extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) => WorkoutDetails(
-                                newExercisesList: snapshot.data[index].exercises,
+                                newExercisesList:
+                                    snapshot.data[index].exercises,
                               ),
                             )),
                         child: WorkoutCard(
@@ -148,16 +152,16 @@ class _WorkoutCardState extends State<WorkoutCard> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                     Row(
-                       mainAxisAlignment: MainAxisAlignment.start,
-                       children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
                           const Icon(Icons.timer_outlined),
                           const SizedBox(
                             width: 4,
                           ),
-                          Text('${widget.workout.time}\'minutes'),
-                       ],
-                     ),
+                          Text('${widget.workout.time}\'menit'),
+                        ],
+                      ),
                       // const Spacer(),
                       const SizedBox(
                         height: 8,

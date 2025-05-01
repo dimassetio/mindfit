@@ -89,7 +89,7 @@ class _ExerciseCardState extends State<ExerciseCard> {
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                       Text(
-                        'Equipment: ${widget.exercise.equipment}',
+                        'Peralatan: ${widget.exercise.equipment}',
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ],
@@ -107,7 +107,6 @@ class _ExerciseCardState extends State<ExerciseCard> {
                           // const SizedBox(
                           //   width: 4,
                           // ),
-                          
                         ],
                       ),
                       // const Spacer(),

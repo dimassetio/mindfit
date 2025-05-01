@@ -31,11 +31,11 @@ class _NavigationState extends State<Navigation> {
   ];
 
   final List<String> _screenTitles = const <String>[
-    'Recipes',
-    'Plans',
+    'Resep',
+    'Rencana',
     'Mindfit',
-    'Diary',
-    'Together',
+    'Diari',
+    'Bersama',
   ];
 
   @override
@@ -93,11 +93,11 @@ class _NavigationState extends State<Navigation> {
               items: const <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
                   icon: Icon(Icons.restaurant_menu),
-                  label: 'Recipes',
+                  label: 'Resep',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.fitness_center),
-                  label: 'Plans',
+                  label: 'Rencana',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.home),
@@ -105,12 +105,12 @@ class _NavigationState extends State<Navigation> {
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.leaderboard),
-                  label: 'Diary',
+                  label: 'Diari',
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.flag),
-                  label: 'Together',
-                ),
+                // BottomNavigationBarItem(
+                //   icon: Icon(Icons.flag),
+                //   label: 'Bersama',
+                // ),
               ],
               selectedItemColor: Colors.red,
               selectedIconTheme: const IconThemeData(size: 30),

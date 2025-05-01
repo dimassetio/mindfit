@@ -11,7 +11,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('Conversation')),
+        appBar: AppBar(title: const Text('Percakapan')),
         body: const Padding(
           padding: EdgeInsets.all(8.0),
           child: Column(

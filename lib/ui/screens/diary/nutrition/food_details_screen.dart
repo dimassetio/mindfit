@@ -60,7 +60,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Food'),
+        title: const Text('Tambah Makanan'),
         actions: [
           IconButton(
               onPressed: () {
@@ -92,7 +92,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
             Row(
               children: [
                 const Expanded(
-                  child: Text('Meal'),
+                  child: Text('Hidangan'),
                 ),
                 TextButton(
                     onPressed: () {
@@ -100,10 +100,10 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                           context: context,
                           builder: (context) {
                             return SimpleDialog(
-                              title: const Text('Meals'),
+                              title: const Text('Hidangan'),
                               children: [
                                 SimpleDialogOption(
-                                    child: const Text('Breakfast'),
+                                    child: const Text('Sarapan'),
                                     onPressed: () {
                                       setState(() {
                                         meal = 'Breakfast';
@@ -111,7 +111,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                                       Navigator.pop(context);
                                     }),
                                 SimpleDialogOption(
-                                    child: const Text('Lunch'),
+                                    child: const Text('Makan Siang'),
                                     onPressed: () {
                                       setState(() {
                                         meal = 'Lunch';
@@ -119,7 +119,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                                       Navigator.pop(context);
                                     }),
                                 SimpleDialogOption(
-                                    child: const Text('Dinner'),
+                                    child: const Text('Makanan Malam'),
                                     onPressed: () {
                                       setState(() {
                                         meal = 'Dinner';
@@ -127,7 +127,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                                       Navigator.pop(context);
                                     }),
                                 SimpleDialogOption(
-                                    child: const Text('Snacks'),
+                                    child: const Text('Camilan'),
                                     onPressed: () {
                                       setState(() {
                                         meal = 'Snacks';
@@ -147,7 +147,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
             const Divider(),
             Row(
               children: [
-                const Expanded(child: Text('Number of Servings')),
+                const Expanded(child: Text('Jumlah Sajian')),
                 TextButton(
                     onPressed: () {
                       _servingsDialog(context);
@@ -158,7 +158,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
             const Divider(),
             Row(
               children: [
-                const Expanded(child: Text('Serving Size')),
+                const Expanded(child: Text('Takaran Sajian')),
                 TextButton(
                     onPressed: () {
                       _servingsDialog(context);
@@ -169,7 +169,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
             const Divider(),
             Row(
               children: [
-                const Expanded(child: Text('Time')),
+                const Expanded(child: Text('Waktu')),
                 TextButton(
                   onPressed: () async {
                     final newTime = await showTimePicker(
@@ -235,7 +235,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                     ),
                     Text('${carbs['value']} ${carbs['unitName'].toLowerCase()}',
                         style: const TextStyle(fontSize: 20)),
-                    const Text('Carbs'),
+                    const Text('Karbo'),
                   ],
                 ),
                 Column(
@@ -246,7 +246,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                             color: Color.fromARGB(255, 128, 71, 246))),
                     Text('${fat['value']} ${fat['unitName'].toLowerCase()}',
                         style: const TextStyle(fontSize: 20)),
-                    const Text('Fat'),
+                    const Text('Lemak'),
                   ],
                 ),
                 Column(
@@ -298,7 +298,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
         builder: (context) {
           return SimpleDialog(
             contentPadding: const EdgeInsets.all(16),
-            title: const Text('How Much?'),
+            title: const Text('Berapa Banyak?'),
             children: [
               Row(
                 children: [
@@ -308,7 +308,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                       controller: servingsController,
                     ),
                   ),
-                  const Text('Serving(s) of')
+                  const Text('Jumlah Sajian')
                 ],
               ),
               DropdownButton<double>(
@@ -339,7 +339,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text('cancel'),
+                    child: const Text('batal'),
                   ),
                   TextButton(
                     onPressed: () {
@@ -350,7 +350,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                       }
                       Navigator.pop(context);
                     },
-                    child: const Text('save'),
+                    child: const Text('simpan'),
                   )
                 ],
               )

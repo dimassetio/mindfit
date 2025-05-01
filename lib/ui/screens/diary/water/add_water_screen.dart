@@ -49,7 +49,7 @@ class _MeassureBPMScreenState extends State<AddWaterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Water'),
+        title: const Text('Tambah Air'),
         centerTitle: true,
         actions: [
           IconButton(
@@ -74,7 +74,7 @@ class _MeassureBPMScreenState extends State<AddWaterScreen> {
                     const Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'Today',
+                          'Hari ini',
                           style: TextStyle(fontSize: 20),
                         )),
                     const SizedBox(
@@ -133,7 +133,7 @@ class _MeassureBPMScreenState extends State<AddWaterScreen> {
                       const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            'Reminders',
+                            'Pengingat',
                             style: TextStyle(fontSize: 20),
                           )),
                       const SizedBox(
@@ -142,7 +142,7 @@ class _MeassureBPMScreenState extends State<AddWaterScreen> {
                       ButtonWidget(
                           color: Colors.red,
                           width: 150,
-                          title: 'Notification',
+                          title: 'Notifikasi',
                           func: () async {
                             await _showNotification();
                           }),
@@ -164,8 +164,8 @@ class _MeassureBPMScreenState extends State<AddWaterScreen> {
             ticker: 'ticker');
     const NotificationDetails platformChannelSpecifics =
         NotificationDetails(android: androidPlatformChannelSpecifics);
-    await flutterLocalNotificationsPlugin.show(0, 'Drink Water!',
-        'Don\'t forget to drink water', platformChannelSpecifics,
+    await flutterLocalNotificationsPlugin.show(0, 'Minum Air!',
+        'Jangan lupa untuk minum air', platformChannelSpecifics,
         payload: 'item x');
   }
 }

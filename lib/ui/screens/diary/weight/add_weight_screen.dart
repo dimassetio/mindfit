@@ -37,7 +37,7 @@ class _MeassureBPMScreenState extends State<AddWeightScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Record Weight'),
+        title: const Text('Rekam Berat'),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -94,7 +94,7 @@ class _MeassureBPMScreenState extends State<AddWeightScreen> {
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   children: [
-                    const Text('Weight (kg)'),
+                    const Text('Berat (kg)'),
                     DecimalNumberPicker(
                       minValue: 0,
                       maxValue: 1000,
@@ -127,7 +127,7 @@ class _MeassureBPMScreenState extends State<AddWeightScreen> {
                       children: [
                         const Expanded(
                             child: Text(
-                          'Body fat',
+                          'Lemak Tubuh',
                           style: TextStyle(fontSize: 18),
                         )),
                         SizedBox(
@@ -144,7 +144,7 @@ class _MeassureBPMScreenState extends State<AddWeightScreen> {
                     Row(
                       children: [
                         const Expanded(
-                            child: Text('Skeletal muscle',
+                            child: Text('Otot rangka',
                                 style: TextStyle(fontSize: 18))),
                         SizedBox(
                           width: 40,
@@ -176,7 +176,7 @@ class _MeassureBPMScreenState extends State<AddWeightScreen> {
                         controller: noteController,
                         keyboardType: TextInputType.multiline,
                         maxLines: null,
-                        decoration: const InputDecoration(hintText: 'Notes'),
+                        decoration: const InputDecoration(hintText: 'Catatan'),
                       ),
                     ),
                   ],
@@ -195,16 +195,21 @@ class _MeassureBPMScreenState extends State<AddWeightScreen> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: const Text('Cancel', style: TextStyle(fontSize: 24))),
+                  child: const Text('Batal', style: TextStyle(fontSize: 24))),
             ),
             Expanded(
               child: TextButton(
                   onPressed: () {
-                    FireStoreCrud().updateDiaryWeight(date, currentWeight.toString(), bodyFatController.text.trim(), skeletalMuscleController.text.trim(), noteController.text);
+                    FireStoreCrud().updateDiaryWeight(
+                        date,
+                        currentWeight.toString(),
+                        bodyFatController.text.trim(),
+                        skeletalMuscleController.text.trim(),
+                        noteController.text);
                     Navigator.pop(context);
                   },
                   child: const Text(
-                    'Save',
+                    'Simpan',
                     style: TextStyle(fontSize: 24),
                   )),
             ),

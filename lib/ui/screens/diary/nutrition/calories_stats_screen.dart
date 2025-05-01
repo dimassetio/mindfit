@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:health_tracker/data/repositories/firestore.dart';
+import 'package:health_tracker/ui/screens/diary/nutrition/quick_add_screen.dart';
 import 'package:health_tracker/ui/widgets/indicator_widget.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -21,6 +22,56 @@ class _HeartDetailsScreenState extends State<CaloriesStatsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _getAppBar(context),
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return SimpleDialog(
+                    title: const Text('Hidangan'),
+                    children: [
+                      SimpleDialogOption(
+                          child: const Text('Sarapan'),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const QuickAddScreen(
+                                          type: 'Sarapan',
+                                        )));
+                          }),
+                      SimpleDialogOption(
+                          child: const Text('Makan Siang'),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const QuickAddScreen(
+                                        type: 'Makan Siang')));
+                          }),
+                      SimpleDialogOption(
+                          child: const Text('Makan Malam'),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const QuickAddScreen(
+                                        type: 'Makan Malam')));
+                          }),
+                      SimpleDialogOption(
+                          child: const Text('Camilan'),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const QuickAddScreen(type: 'Camilan')));
+                          }),
+                    ],
+                  );
+                });
+          }),
       body: DefaultTabController(
         length: 3,
         initialIndex: 0,
@@ -31,13 +82,13 @@ class _HeartDetailsScreenState extends State<CaloriesStatsScreen> {
               isScrollable: true,
               tabs: const [
                 Tab(
-                  text: 'Day',
+                  text: 'Hari',
                 ),
                 Tab(
-                  text: 'Week',
+                  text: 'Minggu',
                 ),
                 Tab(
-                  text: 'Month',
+                  text: 'Bulan',
                 ),
               ],
               indicator: BoxDecoration(
@@ -156,7 +207,7 @@ class _HeartDetailsScreenState extends State<CaloriesStatsScreen> {
                                     SizedBox(
                                       height: 8,
                                     ),
-                                    Text('Goal',
+                                    Text('Target',
                                         style: TextStyle(color: Colors.grey)),
                                   ],
                                 ),
@@ -177,7 +228,7 @@ class _HeartDetailsScreenState extends State<CaloriesStatsScreen> {
                                     const SizedBox(
                                       height: 8,
                                     ),
-                                    const Text('Food',
+                                    const Text('Makanan',
                                         style: TextStyle(color: Colors.grey)),
                                   ],
                                 ),
@@ -195,7 +246,7 @@ class _HeartDetailsScreenState extends State<CaloriesStatsScreen> {
                                           fontWeight: FontWeight.bold,
                                           fontSize: 24),
                                     ),
-                                    const Text('Left',
+                                    const Text('Tersisa',
                                         style: TextStyle(color: Colors.grey)),
                                   ],
                                 ),
@@ -263,7 +314,7 @@ class _HeartDetailsScreenState extends State<CaloriesStatsScreen> {
                                     ),
                                     Text('$totalCarbs g',
                                         style: const TextStyle(fontSize: 20)),
-                                    const Text('Carbs'),
+                                    const Text('Karbo'),
                                   ],
                                 ),
                                 Column(
@@ -276,7 +327,7 @@ class _HeartDetailsScreenState extends State<CaloriesStatsScreen> {
                                                 255, 128, 71, 246))),
                                     Text('$totalFat g',
                                         style: const TextStyle(fontSize: 20)),
-                                    const Text('Fat'),
+                                    const Text('Lemak'),
                                   ],
                                 ),
                                 Column(
@@ -302,7 +353,7 @@ class _HeartDetailsScreenState extends State<CaloriesStatsScreen> {
                             const SizedBox(
                               height: 24,
                             ),
-                            // ? Breakfast
+                            // ? Sarapan
                             Card(
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20)),
@@ -312,7 +363,7 @@ class _HeartDetailsScreenState extends State<CaloriesStatsScreen> {
                                   Row(
                                     children: [
                                       const Expanded(
-                                          child: Text('Breakfast',
+                                          child: Text('Sarapan',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 18))),
@@ -364,17 +415,18 @@ class _HeartDetailsScreenState extends State<CaloriesStatsScreen> {
                                       })),
                                   NutritionRow(
                                       protein: breakfast['breakfastProtein']
-                                          .toDouble(),
+                                          ?.toDouble(),
                                       carbs: breakfast['breakfastCarbs']
-                                          .toDouble(),
-                                      fat: breakfast['breakfastFat'].toDouble())
+                                          ?.toDouble(),
+                                      fat:
+                                          breakfast['breakfastFat']?.toDouble())
                                 ]),
                               ),
                             ),
                             const SizedBox(
                               height: 24,
                             ),
-                            // ? Lunch
+                            // ? Makan Siang
                             Card(
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20)),
@@ -384,7 +436,7 @@ class _HeartDetailsScreenState extends State<CaloriesStatsScreen> {
                                   Row(
                                     children: [
                                       const Expanded(
-                                          child: Text('Lunch',
+                                          child: Text('Makan Siang',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 18))),
@@ -439,7 +491,7 @@ class _HeartDetailsScreenState extends State<CaloriesStatsScreen> {
                             const SizedBox(
                               height: 24,
                             ),
-                            // ? Dinner
+                            // ? Makan Malam
                             Card(
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20)),
@@ -449,7 +501,7 @@ class _HeartDetailsScreenState extends State<CaloriesStatsScreen> {
                                   Row(
                                     children: [
                                       const Expanded(
-                                          child: Text('Dinner',
+                                          child: Text('Makan Malam',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 18))),
@@ -516,7 +568,7 @@ class _HeartDetailsScreenState extends State<CaloriesStatsScreen> {
                                   Row(
                                     children: [
                                       const Expanded(
-                                          child: Text('Snacks',
+                                          child: Text('Camilan',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 18))),
@@ -582,9 +634,9 @@ class _HeartDetailsScreenState extends State<CaloriesStatsScreen> {
             ),
 
             // ? WEEK VIEW
-            const Text('Weekly data'),
+            const Text('Data Mingguan'),
             // ? MONTH VIEW
-            const Text('Monthly data'),
+            const Text('Data Bulanan'),
           ]))
         ]),
       ),
@@ -596,7 +648,7 @@ class _HeartDetailsScreenState extends State<CaloriesStatsScreen> {
       centerTitle: true,
       backgroundColor: Colors.transparent,
       title: const Text(
-        'Calories',
+        'Kalori',
         style: TextStyle(fontSize: 20),
       ),
       leading: TextButton(
@@ -654,7 +706,7 @@ class NutritionRow extends StatelessWidget {
           const SizedBox(
             height: 8,
           ),
-          Text('$carbs g Carbs')
+          Text('$carbs g Karbo')
         ],
       ),
       Column(
@@ -664,7 +716,7 @@ class NutritionRow extends StatelessWidget {
           const SizedBox(
             height: 8,
           ),
-          Text('$fat g Fats')
+          Text('$fat g Lemak')
         ],
       ),
       Column(

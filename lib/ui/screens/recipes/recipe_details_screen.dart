@@ -162,13 +162,13 @@ class RecipeDetails extends StatelessWidget {
                           ),
                           tabs: [
                             Tab(
-                              text: "Ingredients".toUpperCase(),
+                              text: "Bahan".toUpperCase(),
                             ),
                             Tab(
-                              text: "Preparation".toUpperCase(),
+                              text: "Persiapan".toUpperCase(),
                             ),
                             Tab(
-                              text: "Reviews".toUpperCase(),
+                              text: "Ulasan".toUpperCase(),
                             ),
                           ],
                         ),
@@ -184,7 +184,7 @@ class RecipeDetails extends StatelessWidget {
                             Preparation(
                               recipeModel: recipeModel,
                             ),
-                            const Text('Reviews'),
+                            const Text('Ulasan'),
                           ],
                         )),
                       ],

@@ -22,7 +22,7 @@ class _MeassureBPMScreenState extends State<MeassureBPMScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Measure heart rate'),
+        title: const Text('Ukur detak jantung'),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -62,8 +62,8 @@ class _MeassureBPMScreenState extends State<MeassureBPMScreen> {
                               height: 16,
                             ),
                             Text(isBPMEnabled
-                                ? 'Put your finger on the camera'
-                                :'Press the heart to measure BPM')
+                                ? 'Letakkan jari di kamera'
+                                : 'Tekan Hati untuk ukur BPM')
                           ],
                         )
                       ]),
@@ -120,17 +120,17 @@ class _MeassureBPMScreenState extends State<MeassureBPMScreen> {
                             children: [
                               Row(children: [
                                 Icon(Icons.circle, size: 6),
-                                Text(' Don\'t press too hard.')
+                                Text(' Jangan tekan terlalu keras.')
                               ]),
                               Row(children: [
                                 Icon(Icons.circle, size: 6),
-                                Text(' Remain still and quiet.')
+                                Text(' Tetap stabil dan tenang.')
                               ]),
                               Row(children: [
                                 Icon(Icons.circle, size: 6),
                                 Expanded(
                                   child: Text(
-                                      ' You\'ll see a steady wave while your finger is in the correct position on the camera.'),
+                                      ' Anda akan melahin ombak stabil ketika jari anda berada di posisi yang tepat dengan kamera'),
                                 )
                               ]),
                             ],

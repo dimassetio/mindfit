@@ -44,8 +44,7 @@ class ExerciseDetails extends StatelessWidget {
                             autoPlay: true,
                             autoPlayAnimationDuration:
                                 const Duration(seconds: 2),
-                                autoPlayInterval: const Duration(seconds: 3)
-                                ))),
+                            autoPlayInterval: const Duration(seconds: 3)))),
               ),
             ),
             panel: Padding(
@@ -105,7 +104,8 @@ class ExerciseDetails extends StatelessWidget {
                       const SizedBox(
                         width: 5,
                       ),
-                      Text('Equipment: ${exerciseDeatails.equipment.toUpperCase()}'),
+                      Text(
+                          'Peralatan: ${exerciseDeatails.equipment.toUpperCase()}'),
                       const SizedBox(
                         width: 20,
                       ),
@@ -146,10 +146,10 @@ class ExerciseDetails extends StatelessWidget {
                           ),
                           tabs: [
                             Tab(
-                              text: "Instructions".toUpperCase(),
+                              text: "Instruksi".toUpperCase(),
                             ),
                             Tab(
-                              text: "Reviews".toUpperCase(),
+                              text: "Ulasan".toUpperCase(),
                             ),
                           ],
                         ),
@@ -165,7 +165,7 @@ class ExerciseDetails extends StatelessWidget {
                             // Preparation(
                             //   exerciseDeatails: exerciseDeatails,
                             // ),
-                            const Text('Reviews'),
+                            const Text('Ulasan'),
                           ],
                         )),
                       ],

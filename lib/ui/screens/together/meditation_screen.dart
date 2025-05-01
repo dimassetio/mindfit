@@ -11,7 +11,10 @@ class _MeditationScreenState extends State<MeditationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(centerTitle: true,title: const Text('Breathing'),),
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text('Bernafas'),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

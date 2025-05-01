@@ -149,6 +149,7 @@ class FireStoreCrud {
           .collection('diary')
           .doc(DateFormat('d-M-y').format(DateTime.now()))
           .set({
+        'date': DateTime.now(),
         'totalCalories': FieldValue.increment(calories),
         'totalProtein': FieldValue.increment(protein),
         'totalCarbs': FieldValue.increment(carbs),
@@ -230,6 +231,7 @@ class FireStoreCrud {
           .collection('diary')
           .doc(DateFormat('d-M-y').format(date))
           .set({
+        'date': DateTime.now(),
         'weight': FieldValue.arrayUnion([
           {
             'hour': date.hour,
@@ -253,10 +255,95 @@ class FireStoreCrud {
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .collection('diary')
           .doc(DateFormat('d-M-y').format(DateTime.now()))
-          .set({'water': waterValue}, SetOptions(merge: true)).onError(
-              (error, stackTrace) => log('Error writing document: $error'));
+          .set({
+        'water': waterValue,
+        'date': DateTime.now(),
+      }, SetOptions(merge: true)).onError(
+        (error, stackTrace) => log('Error writing document: $error'),
+      );
     } catch (e) {
       log(e.toString());
+    }
+  }
+
+  Future<void> updateCalories(String type, double calories, double protein,
+      double fat, double carbs) async {
+    try {
+      final uid = FirebaseAuth.instance.currentUser!.uid;
+      final todayDocRef = _firestore
+          .collection('users')
+          .doc(uid)
+          .collection('diary')
+          .doc(DateFormat('d-M-y').format(DateTime.now()));
+
+      final docSnapshot = await todayDocRef.get();
+
+      Map<String, dynamic> meals = {
+        'Sarapan': {'calories': 0.0, 'protein': 0.0, 'fat': 0.0, 'carbs': 0.0},
+        'Makan Siang': {
+          'calories': 0.0,
+          'protein': 0.0,
+          'fat': 0.0,
+          'carbs': 0.0
+        },
+        'Makan Malam': {
+          'calories': 0.0,
+          'protein': 0.0,
+          'fat': 0.0,
+          'carbs': 0.0
+        },
+        'Snacks': {'calories': 0.0, 'protein': 0.0, 'fat': 0.0, 'carbs': 0.0},
+      };
+
+      if (docSnapshot.exists) {
+        final data = docSnapshot.data() ?? {};
+
+        // Load existing meals data
+        for (var mealType in meals.keys) {
+          if (data.containsKey(mealType)) {
+            final mealData = data[mealType];
+            meals[mealType] = {
+              'calories': (mealData['calories'] ?? 0).toDouble(),
+              'protein': (mealData['protein'] ?? 0).toDouble(),
+              'fat': (mealData['fat'] ?? 0).toDouble(),
+              'carbs': (mealData['carbs'] ?? 0).toDouble(),
+            };
+          }
+        }
+      }
+
+      // Update the specific meal with new data
+      meals[type] = {
+        'calories': calories,
+        'protein': protein,
+        'fat': fat,
+        'carbs': carbs,
+      };
+
+      // Recalculate total
+      double totalCalories = 0;
+      double totalProtein = 0;
+      double totalFat = 0;
+      double totalCarbs = 0;
+
+      for (var mealData in meals.values) {
+        totalCalories += mealData['calories']!;
+        totalProtein += mealData['protein']!;
+        totalFat += mealData['fat']!;
+        totalCarbs += mealData['carbs']!;
+      }
+
+      // Write back to Firestore
+      await todayDocRef.set({
+        ...meals,
+        'total_calories': totalCalories,
+        'total_protein': totalProtein,
+        'total_fat': totalFat,
+        'total_carbs': totalCarbs,
+      }, SetOptions(merge: true)).onError(
+          (error, stackTrace) => log('Error writing document: $error'));
+    } catch (e) {
+      log('Exception: $e');
     }
   }
 

@@ -4,6 +4,7 @@ import 'package:health_tracker/data/repositories/firebase_auth.dart';
 import 'package:health_tracker/ui/screens/auth/registration_screen.dart';
 import 'package:health_tracker/shared/styles/themes.dart';
 import 'package:health_tracker/ui/widgets/button_widget.dart';
+import 'package:health_tracker/ui/widgets/navigation_widget.dart';
 import 'package:health_tracker/ui/widgets/snackbar_widget.dart';
 import 'package:health_tracker/ui/widgets/textfield_widget.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -280,15 +281,22 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _authenticateWithEmailAndPass(context) async {
     if (_formKey.currentState!.validate()) {
-      await FirebaseAuthRepo()
+      var creds = await FirebaseAuthRepo()
           .login(
               email: _emailController.text, password: _passwordController.text)
           .onError((error, stackTrace) {
         MySnackBar.error(
             message: error.toString(), color: Colors.red, context: context);
+        return null;
       });
-      if (FirebaseAuth.instance.currentUser != null) {
-        Navigator.pop(context);
+      print(creds);
+      if (creds?.user != null) {
+        // Navigator.pop(context);
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const Navigation()));
+      } else {
+        MySnackBar.error(
+            message: "Login gagal", color: Colors.red, context: context);
       }
     }
   }

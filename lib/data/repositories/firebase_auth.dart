@@ -57,16 +57,19 @@ class FirebaseAuthRepo implements UserRepository {
   }
 
   @override
-  Future<void> login({required String email, required String password}) async {
+  Future<UserCredential?> login(
+      {required String email, required String password}) async {
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(
+      var creds = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
+      return creds;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         throw 'No user found for that email.';
       } else if (e.code == 'wrong-password') {
         throw 'Wrong password provided for that user.';
       }
+      return null;
     } catch (e) {
       throw e.toString();
     }

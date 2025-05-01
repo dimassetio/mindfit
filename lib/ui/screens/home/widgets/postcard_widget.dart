@@ -278,7 +278,7 @@ class _PostCardState extends State<PostCard> {
                           ),
                         ),
                       ),
-                      const Text('Like')
+                      const Text('Suka')
                     ],
                   ),
                 ],
@@ -310,8 +310,10 @@ class _PostCardState extends State<PostCard> {
                     //   ),
                     // ),
                     Icon(CupertinoIcons.text_bubble),
-                    SizedBox(width: 10,),
-                    Text('Comment')
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text('Komentar')
                   ],
                 ),
               ),

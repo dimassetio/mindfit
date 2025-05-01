@@ -35,13 +35,13 @@ class _RecipesScreenState extends State<RecipesScreen> {
                   isScrollable: true,
                   tabs: [
                     Tab(
-                      text: 'Categories'.toUpperCase(),
+                      text: 'Kategori'.toUpperCase(),
                     ),
                     Tab(
-                      text: 'Favourites'.toUpperCase(),
+                      text: 'Favorite'.toUpperCase(),
                     ),
                     Tab(
-                      text: 'New Recipes'.toUpperCase(),
+                      text: 'Resep Baru'.toUpperCase(),
                     ),
                   ],
                   labelColor:
@@ -61,7 +61,7 @@ class _RecipesScreenState extends State<RecipesScreen> {
                     padding: const EdgeInsets.only(left: 8.0),
                     child: TabBarView(children: [
                       RecipeCategories(recipes: recipesByCategory),
-                      const Center(child: Text("Favourites")),
+                      const Center(child: Text("Favorit")),
                       NewRecipe(
                         newRecipesList: recipeList,
                       ),
@@ -193,7 +193,7 @@ class HorizontalRecipes extends StatelessWidget {
                                     //     ? "${snapshot.data![index].title
                                     //             .substring(0, 30)}..."
                                     //     : snapshot.data![index].title
-                                        ,
+                                    ,
                                     softWrap: false,
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -208,20 +208,22 @@ class HorizontalRecipes extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                              Text("${snapshot.data![index].cookingTime} mins"),
-                              IconButton(
-                                  onPressed: () {
-                                    bookmarked = !bookmarked;
-                                    // setState(() {
-                          
-                                    // });
-                                  },
-                                  icon: Icon(bookmarked
-                                      ? Icons.bookmark
-                                      : Icons.bookmark_border))
-                            ]),
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                      "${snapshot.data![index].cookingTime} mins"),
+                                  IconButton(
+                                      onPressed: () {
+                                        bookmarked = !bookmarked;
+                                        // setState(() {
+
+                                        // });
+                                      },
+                                      icon: Icon(bookmarked
+                                          ? Icons.bookmark
+                                          : Icons.bookmark_border))
+                                ]),
                           )
                         ]),
                       ),

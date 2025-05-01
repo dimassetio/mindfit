@@ -50,7 +50,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Joined',
+                      'Bergabung',
                       style: Theme.of(context)
                           .textTheme
                           .titleMedium!
@@ -105,15 +105,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   AppBar _getAppBar() {
     return AppBar(
-      title: const Text('Profile'),
+      title: const Text('Profil'),
       centerTitle: true,
       actions: [
         PopupMenuButton(
             itemBuilder: (context) => [
                   const PopupMenuItem<int>(
-                      value: 0, child: Text('Edit Profile')),
-                  const PopupMenuItem(child: Text('Edit Profile')),
-                  const PopupMenuItem(child: Text('Edit Profile')),
+                      value: 0, child: Text('Edit Profil')),
+                  // const PopupMenuItem(child: Text('Edit Profile')),
+                  // const PopupMenuItem(child: Text('Edit Profile')),
                 ]),
         // IconButton(onPressed: (){}, icon: const Icon(Icons.more_vert)),
       ],

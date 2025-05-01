@@ -14,7 +14,7 @@ class WorkoutDetails extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: const Text('Exercises'),
+        title: const Text('Latihan'),
         centerTitle: true,
       ),
       body: SingleChildScrollView(

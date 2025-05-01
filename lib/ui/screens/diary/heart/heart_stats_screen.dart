@@ -25,13 +25,13 @@ class _HeartDetailsScreenState extends State<HeartStatsScreen> {
               isScrollable: true,
               tabs: const [
                 Tab(
-                  text: 'Day',
+                  text: 'Hari',
                 ),
                 Tab(
-                  text: 'Week',
+                  text: 'Minggu',
                 ),
                 Tab(
-                  text: 'Month',
+                  text: 'Bulan',
                 ),
               ],
               indicator: BoxDecoration(
@@ -246,7 +246,7 @@ class _HeartDetailsScreenState extends State<HeartStatsScreen> {
                                     children: [
                                       Expanded(
                                           child: Text(
-                                        'Resting',
+                                        'Istirahat',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20),
@@ -297,7 +297,7 @@ class _HeartDetailsScreenState extends State<HeartStatsScreen> {
                   const Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'High today',
+                        'Tinggi Hari ini',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 24),
                       )),
@@ -340,7 +340,7 @@ class _HeartDetailsScreenState extends State<HeartStatsScreen> {
                   const Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Low today',
+                        'Rendah Hari ini',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 24),
                       )),

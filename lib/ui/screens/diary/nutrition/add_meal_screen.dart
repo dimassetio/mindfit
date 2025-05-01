@@ -24,7 +24,7 @@ class _AddFoodScreenState extends State<AddMealScreen> {
   late TextEditingController _searchController;
   // Future<List<Food>> results = [] as Future<List<Food>>;
   String query = '';
-  String _scanBarcode = 'Unknown';
+  String _scanBarcode = 'Tidak diketahui';
 
   @override
   void initState() {
@@ -47,7 +47,7 @@ class _AddFoodScreenState extends State<AddMealScreen> {
       barcodeScanRes = "";
       log(barcodeScanRes);
     } on PlatformException {
-      barcodeScanRes = 'Failed to get platform version.';
+      barcodeScanRes = 'Gagal mendeteksi versi platform';
       return;
     }
 
@@ -87,7 +87,7 @@ class _AddFoodScreenState extends State<AddMealScreen> {
               suffixIcon: IconButton(
                   onPressed: _searchController.clear,
                   icon: const Icon(Icons.close)),
-              hintText: 'Search for a food',
+              hintText: 'Cari makanan',
               // hintStyle: style,
               border: InputBorder.none,
             ),
@@ -103,16 +103,16 @@ class _AddFoodScreenState extends State<AddMealScreen> {
                       isScrollable: true,
                       tabs: const [
                         Tab(
-                          text: 'All',
+                          text: 'Semua',
                         ),
                         Tab(
-                          text: 'My Meals',
+                          text: 'Hidangan Saya',
                         ),
                         Tab(
-                          text: 'My Recipes',
+                          text: 'Resep Saya',
                         ),
                         Tab(
-                          text: 'My Foods',
+                          text: 'Makanan Saya',
                         )
                       ],
                       labelColor: Theme.of(context)
@@ -132,61 +132,61 @@ class _AddFoodScreenState extends State<AddMealScreen> {
                             children: [
                               Row(
                                 children: [
-                                  Expanded(
-                                    child: Card(
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20)),
-                                        child: InkWell(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            onTap: () async {
-                                              await scanBarcodeNormal();
-                                              log(_scanBarcode);
-                                              if (_scanBarcode == 'Unknown') {
-                                                MySnackBar.error(
-                                                    message:
-                                                        'Failed, Try again',
-                                                    color: Colors.red,
-                                                    context: context);
-                                              } else {
-                                                Product product =
-                                                    await OpenFoodFactsAPI
-                                                        .instance
-                                                        .fetchProductByUPC(
-                                                            _scanBarcode /*'6134082000017'*/);
-                                                if (!mounted) {
-                                                  return;
-                                                }
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            ProductDetailsScreen(
-                                                                product:
-                                                                    product,
-                                                                meal: widget
-                                                                    .title)));
-                                              }
-                                            },
-                                            child: const Padding(
-                                              padding: EdgeInsets.all(16.0),
-                                              child: Column(
-                                                children: [
-                                                  Icon(
-                                                    // Icons.qr_code_scanner,
-                                                    CupertinoIcons
-                                                        .barcode_viewfinder,
-                                                    size: 50,
-                                                  ),
-                                                  SizedBox(
-                                                    height: 12,
-                                                  ),
-                                                  Text('Scan a Barcode')
-                                                ],
-                                              ),
-                                            ))),
-                                  ),
+                                  // Expanded(
+                                  //   child: Card(
+                                  //       shape: RoundedRectangleBorder(
+                                  //           borderRadius:
+                                  //               BorderRadius.circular(20)),
+                                  //       child: InkWell(
+                                  //           borderRadius:
+                                  //               BorderRadius.circular(20),
+                                  //           onTap: () async {
+                                  //             await scanBarcodeNormal();
+                                  //             log(_scanBarcode);
+                                  //             if (_scanBarcode == 'Unknown') {
+                                  //               MySnackBar.error(
+                                  //                   message:
+                                  //                       'Failed, Try again',
+                                  //                   color: Colors.red,
+                                  //                   context: context);
+                                  //             } else {
+                                  //               Product product =
+                                  //                   await OpenFoodFactsAPI
+                                  //                       .instance
+                                  //                       .fetchProductByUPC(
+                                  //                           _scanBarcode /*'6134082000017'*/);
+                                  //               if (!mounted) {
+                                  //                 return;
+                                  //               }
+                                  //               Navigator.push(
+                                  //                   context,
+                                  //                   MaterialPageRoute(
+                                  //                       builder: (context) =>
+                                  //                           ProductDetailsScreen(
+                                  //                               product:
+                                  //                                   product,
+                                  //                               meal: widget
+                                  //                                   .title)));
+                                  //             }
+                                  //           },
+                                  //           child: const Padding(
+                                  //             padding: EdgeInsets.all(16.0),
+                                  //             child: Column(
+                                  //               children: [
+                                  //                 Icon(
+                                  //                   // Icons.qr_code_scanner,
+                                  //                   CupertinoIcons
+                                  //                       .barcode_viewfinder,
+                                  //                   size: 50,
+                                  //                 ),
+                                  //                 SizedBox(
+                                  //                   height: 12,
+                                  //                 ),
+                                  //                 Text('Scan a Barcode')
+                                  //               ],
+                                  //             ),
+                                  //           ))),
+                                  // ),
                                   Expanded(
                                     child: Card(
                                         shape: RoundedRectangleBorder(
@@ -200,7 +200,9 @@ class _AddFoodScreenState extends State<AddMealScreen> {
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          const QuickAddScreen()));
+                                                          QuickAddScreen(
+                                                            type: widget.title,
+                                                          )));
                                             },
                                             child: const Padding(
                                               padding: EdgeInsets.all(16.0),
@@ -213,7 +215,7 @@ class _AddFoodScreenState extends State<AddMealScreen> {
                                                   SizedBox(
                                                     height: 12,
                                                   ),
-                                                  Text('Quick Add')
+                                                  Text('Tambahkan Cepat')
                                                 ],
                                               ),
                                             ))),
@@ -226,7 +228,7 @@ class _AddFoodScreenState extends State<AddMealScreen> {
                                   builder: ((BuildContext context,
                                       AsyncSnapshot<List<Food>> snapshot) {
                                     if (snapshot.data == null) {
-                                      return const Text('no data');
+                                      return const Text('tidak ada');
                                     } else {
                                       return ListView.builder(
                                           physics: const ScrollPhysics(),
@@ -267,9 +269,9 @@ class _AddFoodScreenState extends State<AddMealScreen> {
                             ],
                           ),
                         ),
-                        const Center(child: Text("My Meals")),
-                        const Center(child: Text("My Recipes")),
-                        const Center(child: Text("My Foods"))
+                        const Center(child: Text("Hidangan Saya")),
+                        const Center(child: Text("Resep Saya")),
+                        const Center(child: Text("Makanan Saya"))
                       ],
                     ))
                   ],

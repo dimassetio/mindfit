@@ -13,7 +13,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: const Text('Notifications'),
+          title: const Text('Notifikasi'),
         ),
         body: DefaultTabController(
             length: 2,
@@ -23,8 +23,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   height: 40,
                   child: TabBar(
                     tabs: const [
-                      Text('Notifications'),
-                      Text('Messages'),
+                      Text('Notifikasi'),
+                      Text('Pesan'),
                     ],
                     // indicatorColor: Colors.red,
                     indicator: BoxDecoration(
@@ -48,30 +48,30 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             height: 12,
                           ),
                           Text(
-                            'Today',
+                            'Hari ini',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 24),
                           ),
                           SizedBox(
                             height: 12,
                           ),
-                          Text('Nothing to show for today...'),
+                          Text('Tidak ada yang ditampilkan hari ini...'),
                           SizedBox(
                             height: 12,
                           ),
                           Text(
-                            'This Week',
+                            'Minggu ini',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 24),
                           ),
                           SizedBox(
                             height: 12,
                           ),
-                          Text('Nothing to show for this week...'),
+                          Text('Tidak ada yang ditampilkan minggu ini...'),
                         ],
                       ),
                     ),
-                    Text('Messages'),
+                    Text('Pesan'),
                   ],
                 ))
               ],

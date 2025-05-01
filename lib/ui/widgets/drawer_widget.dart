@@ -56,7 +56,7 @@ class _NavDrawerState extends State<NavDrawer> {
         ),
         ListTile(
           leading: const Icon(Icons.verified_user),
-          title: const Text('Profile'),
+          title: const Text('Profil'),
           onTap: () => {
             Navigator.pop(context),
             Navigator.push(
@@ -69,7 +69,7 @@ class _NavDrawerState extends State<NavDrawer> {
         ),
         ListTile(
           leading: const Icon(Icons.message),
-          title: const Text('Messages'),
+          title: const Text('Pesan'),
           onTap: () => {
             Navigator.pop(context),
             Navigator.push(
@@ -80,7 +80,7 @@ class _NavDrawerState extends State<NavDrawer> {
         ),
         ListTile(
           leading: const Icon(Icons.settings),
-          title: const Text('Settings'),
+          title: const Text('Pengaturan'),
           onTap: () => {
             Navigator.of(context).pop(),
             Navigator.push(
@@ -91,7 +91,7 @@ class _NavDrawerState extends State<NavDrawer> {
         ),
         ListTile(
           leading: const Icon(Icons.border_color),
-          title: const Text('Feedback'),
+          title: const Text('Ulasan'),
           onTap: () => {Navigator.of(context).pop()},
         ),
         ListTile(
@@ -107,7 +107,7 @@ class _NavDrawerState extends State<NavDrawer> {
         ),
         ListTile(
           leading: const Icon(CupertinoIcons.moon_stars),
-          title: const Text('Dark Mode'),
+          title: const Text('Mode Gelap'),
           trailing: Consumer<ThemeNotifier>(
             builder: (context, value, child) {
               return CupertinoSwitch(

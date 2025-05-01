@@ -53,7 +53,7 @@ class CommentsScreenState extends State<CommentsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Comments',
+          'Komentar',
         ),
         centerTitle: false,
       ),
@@ -98,7 +98,7 @@ class CommentsScreenState extends State<CommentsScreen> {
                   child: TextField(
                     controller: commentEditingController,
                     decoration: InputDecoration(
-                      hintText: 'Comment as ${user.username}',
+                      hintText: 'Komentar sebagai ${user.username}',
                       border: InputBorder.none,
                     ),
                   ),

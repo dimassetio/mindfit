@@ -60,7 +60,7 @@ class TogetherScreen extends StatelessWidget {
                       width: 80,
                       child: CircleAvatar(
                         backgroundImage: NetworkImage(user.photoUrl),
-                            // AssetImage('assets/images/profile.jpg'),
+                        // AssetImage('assets/images/profile.jpg'),
                         backgroundColor: Colors.red,
                       ),
                     ),
@@ -75,7 +75,7 @@ class TogetherScreen extends StatelessWidget {
                         height: 12,
                       ),
                       Text(
-                        'Hours',
+                        'Jam',
                         style: TextStyle(color: Colors.grey),
                       ),
                     ],
@@ -87,7 +87,8 @@ class TogetherScreen extends StatelessWidget {
               ),
               Text(
                 user.username,
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
               ),
               const SizedBox(
                 height: 24,
@@ -110,7 +111,7 @@ class TogetherScreen extends StatelessWidget {
                     style: TextStyle(fontSize: 22),
                   )),
                   Text(
-                    'Next level',
+                    'Lavel berikutnya',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
@@ -226,7 +227,7 @@ class TogetherScreen extends StatelessWidget {
                                   children: [
                                     Column(
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                          CrossAxisAlignment.center,
                                       children: [
                                         SizedBox(
                                           height: 20,
@@ -241,7 +242,7 @@ class TogetherScreen extends StatelessWidget {
                                           height: 14,
                                         ),
                                         Text(
-                                          '# In rating',
+                                          '# Dalam peringkat',
                                           style: TextStyle(color: Colors.grey),
                                         ),
                                         SizedBox(
@@ -257,7 +258,7 @@ class TogetherScreen extends StatelessWidget {
                                           height: 14,
                                         ),
                                         Text(
-                                          'Completed',
+                                          'Selesai',
                                           style: TextStyle(color: Colors.grey),
                                         ),
                                         SizedBox(
@@ -278,113 +279,113 @@ class TogetherScreen extends StatelessWidget {
                       ],
                     ),
                   )),
-                  Expanded(
-                      child: Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Column(
-                      children: [
-                        Card(
-                            color: const Color.fromARGB(255, 207, 80, 232),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const MeditationScreen()));
-                              },
-                              borderRadius: BorderRadius.circular(20),
-                              child: const Padding(
-                                padding: EdgeInsets.all(16.0),
-                                child: Row(
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Exercise',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 26,
-                                              color: Colors.white),
-                                        ),
-                                        SizedBox(
-                                          height: 14,
-                                        ),
-                                        Text(
-                                          'breathing',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 26,
-                                              color: Colors.white),
-                                        ),
-                                        SizedBox(
-                                          height: 14,
-                                        ),
-                                        Icon(
-                                          Icons.self_improvement,
-                                          size: 26,
-                                        )
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        Card(
-                            color: const Color.fromARGB(255, 252, 103, 39),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            child: InkWell(
-                              onTap: () {},
-                              borderRadius: BorderRadius.circular(20),
-                              child: const Padding(
-                                padding: EdgeInsets.all(16.0),
-                                child: Row(
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Start a',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 26,
-                                              color: Colors.white),
-                                        ),
-                                        SizedBox(
-                                          height: 14,
-                                        ),
-                                        Text(
-                                          'challenge',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 26,
-                                              color: Colors.white),
-                                        ),
-                                        SizedBox(
-                                          height: 14,
-                                        ),
-                                        Icon(
-                                          Icons.arrow_forward,
-                                          size: 26,
-                                        )
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )),
-                      ],
-                    ),
-                  ))
+                  // Expanded(
+                  //     child: Padding(
+                  //   padding: const EdgeInsets.only(left: 8.0),
+                  //   child: Column(
+                  //     children: [
+                  //       Card(
+                  //           color: const Color.fromARGB(255, 207, 80, 232),
+                  //           shape: RoundedRectangleBorder(
+                  //               borderRadius: BorderRadius.circular(20)),
+                  //           child: InkWell(
+                  //             onTap: () {
+                  //               Navigator.push(
+                  //                   context,
+                  //                   MaterialPageRoute(
+                  //                       builder: (context) =>
+                  //                           const MeditationScreen()));
+                  //             },
+                  //             borderRadius: BorderRadius.circular(20),
+                  //             child: const Padding(
+                  //               padding: EdgeInsets.all(16.0),
+                  //               child: Row(
+                  //                 children: [
+                  //                   Column(
+                  //                     crossAxisAlignment:
+                  //                         CrossAxisAlignment.start,
+                  //                     children: [
+                  //                       Text(
+                  //                         'Exercise',
+                  //                         style: TextStyle(
+                  //                             fontWeight: FontWeight.bold,
+                  //                             fontSize: 26,
+                  //                             color: Colors.white),
+                  //                       ),
+                  //                       SizedBox(
+                  //                         height: 14,
+                  //                       ),
+                  //                       Text(
+                  //                         'breathing',
+                  //                         style: TextStyle(
+                  //                             fontWeight: FontWeight.bold,
+                  //                             fontSize: 26,
+                  //                             color: Colors.white),
+                  //                       ),
+                  //                       SizedBox(
+                  //                         height: 14,
+                  //                       ),
+                  //                       Icon(
+                  //                         Icons.self_improvement,
+                  //                         size: 26,
+                  //                       )
+                  //                     ],
+                  //                   ),
+                  //                 ],
+                  //               ),
+                  //             ),
+                  //           )),
+                  //       const SizedBox(
+                  //         height: 16,
+                  //       ),
+                  //       Card(
+                  //           color: const Color.fromARGB(255, 252, 103, 39),
+                  //           shape: RoundedRectangleBorder(
+                  //               borderRadius: BorderRadius.circular(20)),
+                  //           child: InkWell(
+                  //             onTap: () {},
+                  //             borderRadius: BorderRadius.circular(20),
+                  //             child: const Padding(
+                  //               padding: EdgeInsets.all(16.0),
+                  //               child: Row(
+                  //                 children: [
+                  //                   Column(
+                  //                     crossAxisAlignment:
+                  //                         CrossAxisAlignment.start,
+                  //                     children: [
+                  //                       Text(
+                  //                         'Start a',
+                  //                         style: TextStyle(
+                  //                             fontWeight: FontWeight.bold,
+                  //                             fontSize: 26,
+                  //                             color: Colors.white),
+                  //                       ),
+                  //                       SizedBox(
+                  //                         height: 14,
+                  //                       ),
+                  //                       Text(
+                  //                         'challenge',
+                  //                         style: TextStyle(
+                  //                             fontWeight: FontWeight.bold,
+                  //                             fontSize: 26,
+                  //                             color: Colors.white),
+                  //                       ),
+                  //                       SizedBox(
+                  //                         height: 14,
+                  //                       ),
+                  //                       Icon(
+                  //                         Icons.arrow_forward,
+                  //                         size: 26,
+                  //                       )
+                  //                     ],
+                  //                   ),
+                  //                 ],
+                  //               ),
+                  //             ),
+                  //           )),
+                  //     ],
+                  //   ),
+                  // ))
                 ],
               )
             ],

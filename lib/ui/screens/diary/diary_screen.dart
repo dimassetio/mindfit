@@ -17,6 +17,8 @@ import 'package:health_tracker/ui/screens/diary/sleep/sleep_stats_screen.dart';
 import 'package:health_tracker/ui/screens/diary/water/add_water_screen.dart';
 import 'package:health_tracker/ui/screens/diary/water/water_stats_screen.dart';
 import 'package:health_tracker/ui/screens/diary/weight/add_weight_screen.dart';
+import 'package:health_tracker/ui/screens/diary/weight/weight_chart_widget.dart';
+import 'package:health_tracker/ui/screens/diary/weight/weight_details_screen.dart';
 import 'package:health_tracker/ui/widgets/indicator_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:pedometer/pedometer.dart';
@@ -69,7 +71,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
   void onPedestrianStatusError(error) {
     log('onPedestrianStatusError: $error');
     setState(() {
-      _status = 'Pedestrian Status not available';
+      _status = 'Status pejalan kaki tidak tersedia';
     });
     log(_status);
   }
@@ -122,8 +124,8 @@ class _DiaryScreenState extends State<DiaryScreen> {
                         children: [
                           Text(
                             DateTime.now().hour > 12 || DateTime.now().hour < 3
-                                ? 'Good evening, '
-                                : 'Good morning, ',
+                                ? 'Selamat petang, '
+                                : 'Selamat pagi, ',
                             style: const TextStyle(fontSize: 22),
                           ),
                           Text(
@@ -162,234 +164,234 @@ class _DiaryScreenState extends State<DiaryScreen> {
                         height: 30,
                       ),
                       // ? STEPS CARD
-                      Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)),
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(20),
-                          onTap: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Column(
-                              children: [
-                                const Row(
-                                  children: [
-                                    Expanded(
-                                        flex: 2,
-                                        child: Text('Activity',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold))),
-                                    Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text(
-                                        'Today',
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 24,
-                                ),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: CircularPercentIndicator(
-                                        // reverse: true,
-                                        radius: 50,
-                                        lineWidth: 7,
-                                        animation: true,
-                                        animateFromLastPercent: true,
-                                        percent: _todaySteps < 12000
-                                            ? _todaySteps / 12000
-                                            : 1,
-                                        center: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              '$_todaySteps',
-                                              style: const TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 22),
-                                            ),
-                                            const SizedBox(
-                                              height: 2,
-                                            ),
-                                            Text('Steps',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 12,
-                                                    color:
-                                                        Colors.grey.shade500)),
-                                          ],
-                                        ),
-                                        backgroundColor: Colors.grey.shade800
-                                            .withOpacity(0.3),
-                                        linearGradient:
-                                            const LinearGradient(colors: [
-                                          Color.fromARGB(255, 224, 139, 27),
-                                          Colors.pink,
-                                        ]),
-                                        circularStrokeCap:
-                                            CircularStrokeCap.round,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: CircularPercentIndicator(
-                                        // reverse: true,
-                                        radius: 50,
-                                        lineWidth: 7,
-                                        animation: true,
-                                        percent: _todaySteps * 0.04 / 1000,
-                                        center: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              (_todaySteps * 0.04)
-                                                  .round()
-                                                  .toString(),
-                                              style: const TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 22),
-                                            ),
-                                            const SizedBox(
-                                              height: 2,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                const Icon(
-                                                    Icons.local_fire_department,
-                                                    size: 12),
-                                                Text('kcal',
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 12,
-                                                        color: Colors
-                                                            .grey.shade500)),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                        backgroundColor: Colors.grey.shade800
-                                            .withOpacity(0.3),
-                                        linearGradient: const LinearGradient(
-                                            colors: [
-                                              Color.fromARGB(255, 224, 139, 27),
-                                              Colors.pink
-                                            ]),
-                                        circularStrokeCap:
-                                            CircularStrokeCap.round,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 16,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Column(
-                                      children: [
-                                        const Icon(Icons.location_on,
-                                            color: Color.fromARGB(
-                                                255, 255, 150, 128)),
-                                        const SizedBox(
-                                          height: 8,
-                                        ),
-                                        const Text('Distance'),
-                                        const SizedBox(
-                                          height: 4,
-                                        ),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              (_todaySteps * 0.0007)
-                                                  .toStringAsFixed(2),
-                                              style: const TextStyle(
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            const Text(
-                                              'km',
-                                              style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 10),
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                    const Column(
-                                      children: [
-                                        Icon(FontAwesomeIcons.personWalking,
-                                            color: Color.fromARGB(
-                                                255, 249, 149, 76)),
-                                        SizedBox(
-                                          height: 8,
-                                        ),
-                                        Text('Walking'),
-                                        SizedBox(
-                                          height: 4,
-                                        ),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              '76',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            Text(
-                                              '%',
-                                              style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 14),
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                    const Column(
-                                      children: [
-                                        Icon(FontAwesomeIcons.personRunning,
-                                            color: Color.fromARGB(
-                                                255, 247, 105, 132)),
-                                        SizedBox(
-                                          height: 8,
-                                        ),
-                                        Text('Running'),
-                                        SizedBox(
-                                          height: 4,
-                                        ),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              '24',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            Text(
-                                              '%',
-                                              style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 14),
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      // const SizedBox(
+                      // Card(
+                      //   shape: RoundedRectangleBorder(
+                      //       borderRadius: BorderRadius.circular(20)),
+                      //   child: InkWell(
+                      //     borderRadius: BorderRadius.circular(20),
+                      //     onTap: () {},
+                      //     child: Padding(
+                      //       padding: const EdgeInsets.all(16.0),
+                      //       child: Column(
+                      //         children: [
+                      //           const Row(
+                      //             children: [
+                      //               Expanded(
+                      //                   flex: 2,
+                      //                   child: Text('Aktivitas',
+                      //                       style: TextStyle(
+                      //                           fontWeight: FontWeight.bold))),
+                      //               Align(
+                      //                 alignment: Alignment.centerLeft,
+                      //                 child: Text(
+                      //                   'Hari ini',
+                      //                 ),
+                      //               ),
+                      //             ],
+                      //           ),
+                      //           const SizedBox(
+                      //             height: 24,
+                      //           ),
+                      //           Row(
+                      //             children: [
+                      //               Expanded(
+                      //                 child: CircularPercentIndicator(
+                      //                   // reverse: true,
+                      //                   radius: 50,
+                      //                   lineWidth: 7,
+                      //                   animation: true,
+                      //                   animateFromLastPercent: true,
+                      //                   percent: _todaySteps < 12000
+                      //                       ? _todaySteps / 12000
+                      //                       : 1,
+                      //                   center: Column(
+                      //                     mainAxisAlignment:
+                      //                         MainAxisAlignment.center,
+                      //                     children: [
+                      //                       Text(
+                      //                         '$_todaySteps',
+                      //                         style: const TextStyle(
+                      //                             fontWeight: FontWeight.bold,
+                      //                             fontSize: 22),
+                      //                       ),
+                      //                       const SizedBox(
+                      //                         height: 2,
+                      //                       ),
+                      //                       Text('Steps',
+                      //                           style: TextStyle(
+                      //                               fontWeight: FontWeight.bold,
+                      //                               fontSize: 12,
+                      //                               color:
+                      //                                   Colors.grey.shade500)),
+                      //                     ],
+                      //                   ),
+                      //                   backgroundColor: Colors.grey.shade800
+                      //                       .withOpacity(0.3),
+                      //                   linearGradient:
+                      //                       const LinearGradient(colors: [
+                      //                     Color.fromARGB(255, 224, 139, 27),
+                      //                     Colors.pink,
+                      //                   ]),
+                      //                   circularStrokeCap:
+                      //                       CircularStrokeCap.round,
+                      //                 ),
+                      //               ),
+                      //               Expanded(
+                      //                 child: CircularPercentIndicator(
+                      //                   // reverse: true,
+                      //                   radius: 50,
+                      //                   lineWidth: 7,
+                      //                   animation: true,
+                      //                   percent: _todaySteps * 0.04 / 1000,
+                      //                   center: Column(
+                      //                     mainAxisAlignment:
+                      //                         MainAxisAlignment.center,
+                      //                     children: [
+                      //                       Text(
+                      //                         (_todaySteps * 0.04)
+                      //                             .round()
+                      //                             .toString(),
+                      //                         style: const TextStyle(
+                      //                             fontWeight: FontWeight.bold,
+                      //                             fontSize: 22),
+                      //                       ),
+                      //                       const SizedBox(
+                      //                         height: 2,
+                      //                       ),
+                      //                       Row(
+                      //                         mainAxisAlignment:
+                      //                             MainAxisAlignment.center,
+                      //                         children: [
+                      //                           const Icon(
+                      //                               Icons.local_fire_department,
+                      //                               size: 12),
+                      //                           Text('kcal',
+                      //                               style: TextStyle(
+                      //                                   fontWeight:
+                      //                                       FontWeight.bold,
+                      //                                   fontSize: 12,
+                      //                                   color: Colors
+                      //                                       .grey.shade500)),
+                      //                         ],
+                      //                       ),
+                      //                     ],
+                      //                   ),
+                      //                   backgroundColor: Colors.grey.shade800
+                      //                       .withOpacity(0.3),
+                      //                   linearGradient: const LinearGradient(
+                      //                       colors: [
+                      //                         Color.fromARGB(255, 224, 139, 27),
+                      //                         Colors.pink
+                      //                       ]),
+                      //                   circularStrokeCap:
+                      //                       CircularStrokeCap.round,
+                      //                 ),
+                      //               ),
+                      //             ],
+                      //           ),
+                      //           const SizedBox(
+                      //             height: 16,
+                      //           ),
+                      //           Row(
+                      //             mainAxisAlignment:
+                      //                 MainAxisAlignment.spaceEvenly,
+                      //             children: [
+                      //               Column(
+                      //                 children: [
+                      //                   const Icon(Icons.location_on,
+                      //                       color: Color.fromARGB(
+                      //                           255, 255, 150, 128)),
+                      //                   const SizedBox(
+                      //                     height: 8,
+                      //                   ),
+                      //                   const Text('Jarak'),
+                      //                   const SizedBox(
+                      //                     height: 4,
+                      //                   ),
+                      //                   Row(
+                      //                     children: [
+                      //                       Text(
+                      //                         (_todaySteps * 0.0007)
+                      //                             .toStringAsFixed(2),
+                      //                         style: const TextStyle(
+                      //                             fontWeight: FontWeight.bold),
+                      //                       ),
+                      //                       const Text(
+                      //                         'km',
+                      //                         style: TextStyle(
+                      //                             color: Colors.grey,
+                      //                             fontSize: 10),
+                      //                       ),
+                      //                     ],
+                      //                   )
+                      //                 ],
+                      //               ),
+                      //               const Column(
+                      //                 children: [
+                      //                   Icon(FontAwesomeIcons.personWalking,
+                      //                       color: Color.fromARGB(
+                      //                           255, 249, 149, 76)),
+                      //                   SizedBox(
+                      //                     height: 8,
+                      //                   ),
+                      //                   Text('Berjalan'),
+                      //                   SizedBox(
+                      //                     height: 4,
+                      //                   ),
+                      //                   Row(
+                      //                     children: [
+                      //                       Text(
+                      //                         '76',
+                      //                         style: TextStyle(
+                      //                             fontWeight: FontWeight.bold),
+                      //                       ),
+                      //                       Text(
+                      //                         '%',
+                      //                         style: TextStyle(
+                      //                             color: Colors.grey,
+                      //                             fontSize: 14),
+                      //                       ),
+                      //                     ],
+                      //                   )
+                      //                 ],
+                      //               ),
+                      //               const Column(
+                      //                 children: [
+                      //                   Icon(FontAwesomeIcons.personRunning,
+                      //                       color: Color.fromARGB(
+                      //                           255, 247, 105, 132)),
+                      //                   SizedBox(
+                      //                     height: 8,
+                      //                   ),
+                      //                   Text('Berlari'),
+                      //                   SizedBox(
+                      //                     height: 4,
+                      //                   ),
+                      //                   Row(
+                      //                     children: [
+                      //                       Text(
+                      //                         '24',
+                      //                         style: TextStyle(
+                      //                             fontWeight: FontWeight.bold),
+                      //                       ),
+                      //                       Text(
+                      //                         '%',
+                      //                         style: TextStyle(
+                      //                             color: Colors.grey,
+                      //                             fontSize: 14),
+                      //                       ),
+                      //                     ],
+                      //                   )
+                      //                 ],
+                      //               ),
+                      //             ],
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                      // // const SizedBox(
                       //   height: 12,
                       // ),
                       // ? DOUBLE COLUMN
@@ -421,7 +423,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                                           Row(
                                             children: [
                                               const Expanded(
-                                                  child: Text('Heart rate',
+                                                  child: Text('Detak Jantung',
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold,
@@ -533,26 +535,26 @@ class _DiaryScreenState extends State<DiaryScreen> {
                                               ],
                                             )),
                                           ),
-                                          Row(
-                                            children: [
-                                              const Text(
-                                                '107',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 24),
-                                              ),
-                                              const SizedBox(
-                                                width: 4,
-                                              ),
-                                              Text(
-                                                'bpm',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color:
-                                                        Colors.grey.shade600),
-                                              ),
-                                            ],
-                                          )
+                                          // Row(
+                                          //   children: [
+                                          //     const Text(
+                                          //       '107',
+                                          //       style: TextStyle(
+                                          //           fontWeight: FontWeight.bold,
+                                          //           fontSize: 24),
+                                          //     ),
+                                          //     const SizedBox(
+                                          //       width: 4,
+                                          //     ),
+                                          //     Text(
+                                          //       'bpm',
+                                          //       style: TextStyle(
+                                          //           fontWeight: FontWeight.bold,
+                                          //           color:
+                                          //               Colors.grey.shade600),
+                                          //     ),
+                                          //   ],
+                                          // )
                                         ],
                                       ),
                                     ),
@@ -605,7 +607,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                                                     children: [
                                                       const Expanded(
                                                           child: Text(
-                                                        'Water',
+                                                        'Air',
                                                         style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight.bold,
@@ -814,8 +816,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                                                   const Row(
                                                     children: [
                                                       Expanded(
-                                                          child: Text(
-                                                              'Calories',
+                                                          child: Text('Kalori',
                                                               style: TextStyle(
                                                                   fontWeight:
                                                                       FontWeight
@@ -922,7 +923,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                                                           const SizedBox(
                                                             height: 8,
                                                           ),
-                                                          const Text('Carbs'),
+                                                          const Text('Karbo'),
                                                           const SizedBox(
                                                             height: 4,
                                                           ),
@@ -963,7 +964,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                                                           const SizedBox(
                                                             height: 8,
                                                           ),
-                                                          const Text('Fat'),
+                                                          const Text('Lemak'),
                                                           const SizedBox(
                                                             height: 4,
                                                           ),
@@ -1064,7 +1065,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                                             children: [
                                               const Expanded(
                                                   child: Text(
-                                                'Sleep',
+                                                'Tidur',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20),
@@ -1100,7 +1101,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                                                 width: 4,
                                               ),
                                               Text(
-                                                'Hrs/day',
+                                                'Jam/hari',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     color:
@@ -1124,7 +1125,13 @@ class _DiaryScreenState extends State<DiaryScreen> {
                               borderRadius: BorderRadius.circular(20)),
                           child: InkWell(
                               borderRadius: BorderRadius.circular(20),
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            WeightDetailsScreen()));
+                              },
                               child: Padding(
                                 padding: const EdgeInsets.all(16.0),
                                 child: Column(children: [
@@ -1132,7 +1139,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                                     children: [
                                       const Expanded(
                                           child: Text(
-                                        'Weight',
+                                        'Berat',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20),
@@ -1155,70 +1162,9 @@ class _DiaryScreenState extends State<DiaryScreen> {
                                   ),
                                   // ? WEIGHT CHART
                                   SizedBox(
-                                    height: 180,
-                                    width: double.infinity,
-                                    child: LineChart(LineChartData(
-                                      gridData: const FlGridData(
-                                          drawVerticalLine: false,
-                                          drawHorizontalLine: true),
-                                      borderData: FlBorderData(show: false),
-                                      titlesData: const FlTitlesData(
-                                        show: true,
-                                        topTitles: AxisTitles(
-                                          sideTitles:
-                                              SideTitles(showTitles: false),
-                                        ),
-                                        rightTitles: AxisTitles(
-                                          sideTitles:
-                                              SideTitles(showTitles: false),
-                                        ),
-                                        bottomTitles: AxisTitles(
-                                          sideTitles: SideTitles(
-                                            showTitles: true,
-                                            reservedSize: 30,
-                                            interval: 1,
-                                            getTitlesWidget:
-                                                weightBottomTitleWidgets,
-                                          ),
-                                        ),
-                                        leftTitles: AxisTitles(
-                                          sideTitles: SideTitles(
-                                            showTitles: true,
-                                            interval: 1,
-                                            getTitlesWidget:
-                                                weightLeftTitleWidgets,
-                                            reservedSize: 42,
-                                          ),
-                                        ),
-                                      ),
-                                      minX: 0,
-                                      maxX: 4,
-                                      minY: 40,
-                                      maxY: 90,
-                                      lineBarsData: [
-                                        LineChartBarData(
-                                          spots: const [
-                                            FlSpot(0, 60),
-                                            FlSpot(4, 57),
-                                          ],
-                                          isCurved: true,
-                                          gradient: const LinearGradient(
-                                            colors: [
-                                              Color.fromARGB(255, 92, 98, 255),
-                                              Color.fromARGB(255, 73, 79, 255),
-                                            ],
-                                            begin: Alignment.centerLeft,
-                                            end: Alignment.centerRight,
-                                          ),
-                                          barWidth: 4,
-                                          isStrokeCapRound: true,
-                                          dotData: const FlDotData(
-                                            show: false,
-                                          ),
-                                        )
-                                      ],
-                                    )),
-                                  ),
+                                      height: 180,
+                                      width: double.infinity,
+                                      child: WeightChartWidget()),
                                 ]),
                               ))),
                     ],
@@ -1253,9 +1199,13 @@ class _DiaryScreenState extends State<DiaryScreen> {
               },
               shape: const CircleBorder(),
               padding: const EdgeInsets.all(24.0),
-              child: const Icon(
-                FontAwesomeIcons.heartPulse,
+              child: SizedBox(
+                width: 24,
+                height: 24,
               ),
+              // child: const Icon(
+              //   FontAwesomeIcons.heartPulse,
+              // ),
             ),
             RawMaterialButton(
               onPressed: () {
@@ -1277,48 +1227,48 @@ class _DiaryScreenState extends State<DiaryScreen> {
                       context: context,
                       builder: (context) {
                         return SimpleDialog(
-                          title: const Text('Meals'),
+                          title: const Text('Hidangan'),
                           children: [
                             SimpleDialogOption(
-                                child: const Text('Breakfast'),
+                                child: const Text('Sarapan'),
                                 onPressed: () {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
                                               const AddMealScreen(
-                                                title: 'Breakfast',
+                                                title: 'Sarapan',
                                               )));
                                 }),
                             SimpleDialogOption(
-                                child: const Text('Lunch'),
+                                child: const Text('Makan Siang'),
                                 onPressed: () {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
                                               const AddMealScreen(
-                                                  title: 'Lunch')));
+                                                  title: 'Makan Siang')));
                                 }),
                             SimpleDialogOption(
-                                child: const Text('Dinner'),
+                                child: const Text('Makan Malam'),
                                 onPressed: () {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
                                               const AddMealScreen(
-                                                  title: 'Dinner')));
+                                                  title: 'Makan Malam')));
                                 }),
                             SimpleDialogOption(
-                                child: const Text('Snacks'),
+                                child: const Text('Camilan'),
                                 onPressed: () {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
                                               const AddMealScreen(
-                                                  title: 'Snacks')));
+                                                  title: 'Camilan')));
                                 }),
                           ],
                         );
@@ -1330,14 +1280,14 @@ class _DiaryScreenState extends State<DiaryScreen> {
                 child: const Icon(
                   Icons.restaurant,
                 )),
-            RawMaterialButton(
-              onPressed: () {},
-              shape: const CircleBorder(),
-              padding: const EdgeInsets.all(24.0),
-              child: const Icon(
-                Icons.fitness_center,
-              ),
-            ),
+            // RawMaterialButton(
+            //   onPressed: () {},
+            //   shape: const CircleBorder(),
+            //   padding: const EdgeInsets.all(24.0),
+            //   child: const Icon(
+            //     Icons.fitness_center,
+            //   ),
+            // ),
             RawMaterialButton(
                 onPressed: () {
                   Navigator.push(

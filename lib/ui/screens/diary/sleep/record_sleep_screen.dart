@@ -13,7 +13,7 @@ class _RecordSleepScreenState extends State<RecordSleepScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Record Sleep'),
+          title: const Text('Rekam Tidur'),
           centerTitle: true,
         ),
         body: Padding(
@@ -27,7 +27,7 @@ class _RecordSleepScreenState extends State<RecordSleepScreen> {
                 ticks: 12,
                 ticksLength: 5,
                 backgroundWidget: const Text(
-                  'Sleep Time',
+                  'Waktu Tidur',
                   style: TextStyle(fontSize: 24),
                 ),
               ),
